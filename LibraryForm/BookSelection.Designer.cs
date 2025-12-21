@@ -33,34 +33,62 @@ namespace LibraryForm
         {
             this.BookComboBox = new System.Windows.Forms.ComboBox();
             this.SelectBook = new System.Windows.Forms.Label();
+            this.DataGridViewCopies = new System.Windows.Forms.DataGridView();
+            this.SelectCopy = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewCopies)).BeginInit();
             this.SuspendLayout();
             // 
             // BookComboBox
             // 
             this.BookComboBox.FormattingEnabled = true;
-            this.BookComboBox.Location = new System.Drawing.Point(331, 231);
+            this.BookComboBox.Location = new System.Drawing.Point(423, 194);
             this.BookComboBox.Name = "BookComboBox";
-            this.BookComboBox.Size = new System.Drawing.Size(121, 24);
+            this.BookComboBox.Size = new System.Drawing.Size(173, 24);
             this.BookComboBox.TabIndex = 0;
             // 
             // SelectBook
             // 
             this.SelectBook.AutoSize = true;
-            this.SelectBook.Location = new System.Drawing.Point(319, 187);
+            this.SelectBook.Location = new System.Drawing.Point(438, 115);
             this.SelectBook.Name = "SelectBook";
             this.SelectBook.Size = new System.Drawing.Size(143, 17);
             this.SelectBook.TabIndex = 1;
             this.SelectBook.Text = "Please select a book ";
             // 
+            // DataGridViewCopies
+            // 
+            this.DataGridViewCopies.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.DataGridViewCopies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewCopies.GridColor = System.Drawing.SystemColors.Control;
+            this.DataGridViewCopies.Location = new System.Drawing.Point(122, 356);
+            this.DataGridViewCopies.Name = "DataGridViewCopies";
+            this.DataGridViewCopies.RowHeadersWidth = 51;
+            this.DataGridViewCopies.RowTemplate.Height = 24;
+            this.DataGridViewCopies.Size = new System.Drawing.Size(820, 276);
+            this.DataGridViewCopies.TabIndex = 2;
+            // 
+            // SelectCopy
+            // 
+            this.SelectCopy.AutoSize = true;
+            this.SelectCopy.Location = new System.Drawing.Point(462, 314);
+            this.SelectCopy.Name = "SelectCopy";
+            this.SelectCopy.Size = new System.Drawing.Size(93, 17);
+            this.SelectCopy.TabIndex = 3;
+            this.SelectCopy.Text = "Select a copy";
+            // 
             // BookSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1016, 718);
+            this.Controls.Add(this.SelectCopy);
+            this.Controls.Add(this.DataGridViewCopies);
             this.Controls.Add(this.SelectBook);
             this.Controls.Add(this.BookComboBox);
             this.Name = "BookSelection";
             this.Text = "Book Selection";
+            this.Load += new System.EventHandler(this.BookSelection_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewCopies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,8 +98,8 @@ namespace LibraryForm
 
         private System.Windows.Forms.ComboBox BookComboBox;
         private System.Windows.Forms.Label SelectBook;
-
-        
+        private System.Windows.Forms.DataGridView DataGridViewCopies;
+        private System.Windows.Forms.Label SelectCopy;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using LibraryForm.Model;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,15 +14,18 @@ namespace LibraryForm.Utils
             const int COL_TITLE = 2;
             const int COL_AUTHOR = 3;
 
+            //Licence for polyform
+            ExcelPackage.License.SetNonCommercialPersonal("Marios Grammatopoulos");
+
             FileInfo file = new FileInfo(filepath);
 
             var ep = new ExcelPackage(file);
             var ws = ep.Workbook.Worksheets["Sheet1"];
 
-            var result  = new List<Book>();
+            var result = new List<Book>();
             for (int row = 2; row <= ws.Dimension.End.Row; row++)
             {
-                
+
                 if (ws.Cells[row, COL_BOOK_ID].Value == null ||
                     ws.Cells[row, COL_TITLE].Value == null ||
                     ws.Cells[row, COL_AUTHOR].Value == null)
