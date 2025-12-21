@@ -15,6 +15,7 @@ namespace LibraryForm.Utils
             try
             {
                 return JsonConvert.DeserializeObject<BookLoops>(File.ReadAllText("Books.json"));
+
             }catch (Exception ex)
             {
                 throw new InvalidOperationException("Error fetching data", ex);
@@ -26,6 +27,7 @@ namespace LibraryForm.Utils
             try
             {
                 return JsonConvert.SerializeObject(bookList);
+
             }catch (Exception ex)
             {
                 throw new InvalidOperationException("Error converting data", ex);
