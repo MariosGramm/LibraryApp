@@ -14,7 +14,7 @@ namespace LibraryForm.Utils
             const int COL_TITLE = 2;
             const int COL_AUTHOR = 3;
 
-            //Licence for polyform
+            //License for polyform
             ExcelPackage.License.SetNonCommercialPersonal("Marios Grammatopoulos");
 
             FileInfo file = new FileInfo(filepath);

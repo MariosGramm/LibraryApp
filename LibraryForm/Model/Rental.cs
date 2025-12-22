@@ -2,7 +2,7 @@
 
 namespace LibraryForm.Model
 {
-    class Loan
+    class Rental
     {
         public int BookId { get; set; }
         public int CopyId { get; set; }

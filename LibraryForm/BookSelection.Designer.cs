@@ -43,13 +43,13 @@ namespace LibraryForm
             this.BookComboBox.FormattingEnabled = true;
             this.BookComboBox.Location = new System.Drawing.Point(423, 194);
             this.BookComboBox.Name = "BookComboBox";
-            this.BookComboBox.Size = new System.Drawing.Size(173, 24);
+            this.BookComboBox.Size = new System.Drawing.Size(181, 24);
             this.BookComboBox.TabIndex = 0;
             // 
             // SelectBook
             // 
             this.SelectBook.AutoSize = true;
-            this.SelectBook.Location = new System.Drawing.Point(438, 115);
+            this.SelectBook.Location = new System.Drawing.Point(443, 145);
             this.SelectBook.Name = "SelectBook";
             this.SelectBook.Size = new System.Drawing.Size(143, 17);
             this.SelectBook.TabIndex = 1;
@@ -60,7 +60,7 @@ namespace LibraryForm
             this.DataGridViewCopies.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGridViewCopies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewCopies.GridColor = System.Drawing.SystemColors.Control;
-            this.DataGridViewCopies.Location = new System.Drawing.Point(122, 356);
+            this.DataGridViewCopies.Location = new System.Drawing.Point(121, 356);
             this.DataGridViewCopies.Name = "DataGridViewCopies";
             this.DataGridViewCopies.RowHeadersWidth = 51;
             this.DataGridViewCopies.RowTemplate.Height = 24;
