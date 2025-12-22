@@ -82,5 +82,19 @@ namespace LibraryForm
             }
         }
 
+        private void DataGridViewCopies_CellContentClick(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == DataGridViewCopies.Columns["Loan"].Index && e.RowIndex >= 0)
+            {
+                BookCopy bookCopy = DataGridViewCopies.Rows[e.RowIndex].DataBoundItem as BookCopy;      //selected copy
+
+                //Loan
+                if (bookCopy != null && bookCopy.IsAvailable)
+                {
+
+                }
+            }
+        }
+
     }
 }
