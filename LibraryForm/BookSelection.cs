@@ -11,7 +11,7 @@ namespace LibraryForm
         {
             InitializeComponent();
             BookComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            DataGridViewCopies.CellFormatting += DataGridViewCopies_CellFormating;
+            DataGridViewCopies.CellFormatting += DataGridViewCopies_CellFormatting;
         }
 
         private void BookSelection_Load(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace LibraryForm
         }
 
 
-        private void DataGridViewCopies_CellFormating(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DataGridViewCopies_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (DataGridViewCopies.Columns[e.ColumnIndex].Name == "Loan" && e.RowIndex >= 0)
             {
@@ -73,8 +73,11 @@ namespace LibraryForm
 
                 if (bookCopy != null && !bookCopy.IsAvailable)
                 {
-                    e.Value= "";              //no button 
-                    e.FormattingApplied = true;
+                    DataGridViewButtonCell cell = (DataGridViewButtonCell)DataGridViewCopies.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                    cell.ReadOnly = true;
+                    cell.FlatStyle = FlatStyle.Flat;
+                    cell.Style.ForeColor = System.Drawing.Color.Gray;
                 }
             }
         }
