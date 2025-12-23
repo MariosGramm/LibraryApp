@@ -42,7 +42,7 @@ namespace LibraryForm
             // BookComboBox
             // 
             this.BookComboBox.FormattingEnabled = true;
-            this.BookComboBox.Location = new System.Drawing.Point(423, 194);
+            this.BookComboBox.Location = new System.Drawing.Point(514, 193);
             this.BookComboBox.Name = "BookComboBox";
             this.BookComboBox.Size = new System.Drawing.Size(181, 24);
             this.BookComboBox.TabIndex = 0;
@@ -50,7 +50,7 @@ namespace LibraryForm
             // SelectBook
             // 
             this.SelectBook.AutoSize = true;
-            this.SelectBook.Location = new System.Drawing.Point(443, 145);
+            this.SelectBook.Location = new System.Drawing.Point(536, 143);
             this.SelectBook.Name = "SelectBook";
             this.SelectBook.Size = new System.Drawing.Size(143, 17);
             this.SelectBook.TabIndex = 1;
@@ -61,17 +61,17 @@ namespace LibraryForm
             this.DataGridViewCopies.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGridViewCopies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewCopies.GridColor = System.Drawing.SystemColors.Control;
-            this.DataGridViewCopies.Location = new System.Drawing.Point(121, 356);
+            this.DataGridViewCopies.Location = new System.Drawing.Point(79, 353);
             this.DataGridViewCopies.Name = "DataGridViewCopies";
             this.DataGridViewCopies.RowHeadersWidth = 51;
             this.DataGridViewCopies.RowTemplate.Height = 24;
-            this.DataGridViewCopies.Size = new System.Drawing.Size(820, 276);
+            this.DataGridViewCopies.Size = new System.Drawing.Size(1003, 276);
             this.DataGridViewCopies.TabIndex = 2;
             // 
             // SelectCopy
             // 
             this.SelectCopy.AutoSize = true;
-            this.SelectCopy.Location = new System.Drawing.Point(462, 314);
+            this.SelectCopy.Location = new System.Drawing.Point(554, 312);
             this.SelectCopy.Name = "SelectCopy";
             this.SelectCopy.Size = new System.Drawing.Size(93, 17);
             this.SelectCopy.TabIndex = 3;
@@ -79,7 +79,7 @@ namespace LibraryForm
             // 
             // finishBtn
             // 
-            this.finishBtn.Location = new System.Drawing.Point(480, 664);
+            this.finishBtn.Location = new System.Drawing.Point(557, 561);
             this.finishBtn.Name = "finishBtn";
             this.finishBtn.Size = new System.Drawing.Size(75, 23);
             this.finishBtn.TabIndex = 4;
@@ -91,7 +91,7 @@ namespace LibraryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 718);
+            this.ClientSize = new System.Drawing.Size(1168, 718);
             this.Controls.Add(this.finishBtn);
             this.Controls.Add(this.SelectCopy);
             this.Controls.Add(this.DataGridViewCopies);

@@ -3,6 +3,7 @@ using LibraryForm.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace LibraryForm
             BookComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             DataGridViewCopies.CellFormatting += DataGridViewCopies_CellFormatting;
             DataGridViewCopies.CellContentClick += DataGridViewCopies_CellContentClick;
+            DataGridViewCopies.CellPainting += DataGridViewCopies_CellPainting;
         }
 
         private void BookSelection_Load(object sender, EventArgs e)
@@ -143,7 +145,7 @@ namespace LibraryForm
                     Title = selectedBook.Title,
                     LoanDate = (DateTime)bookCopy.LoanDate,
                     ReturnDueDate = (DateTime)bookCopy.ReturnDueDate,   
-                    Borrower = DataGridViewCopies.Rows[e.RowIndex].Cells["Borrower"].Value?.ToString() ?? ""
+                    Borrower = DataGridViewCopies.Rows[e.RowIndex].Cells["Borrower"].Value?.ToString() ?? "No name provided"
                 };
 
                 
@@ -179,9 +181,35 @@ namespace LibraryForm
             }
         }
 
+        void DataGridViewCopies_CellPainting(Object sender, DataGridViewCellPaintingEventArgs e )
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)            
+            {
+                return;
+            }
+
+            if (e.ColumnIndex != 1)
+            {
+                return;
+            }
+
+            if (e.Value != null)
+            {
+                return;
+            }
+
+            //Paint every DataGridViewPaintPart except the ContentForeground
+            e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground));
+
+            TextRenderer.DrawText(e.Graphics, "Enter a name", e.CellStyle.Font,
+                e.CellBounds, SystemColors.GrayText, TextFormatFlags.Left);
+
+            e.Handled = true;
+        }
+
         private void finishBtn_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
