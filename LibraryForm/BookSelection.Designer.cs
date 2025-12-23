@@ -35,6 +35,7 @@ namespace LibraryForm
             this.SelectBook = new System.Windows.Forms.Label();
             this.DataGridViewCopies = new System.Windows.Forms.DataGridView();
             this.SelectCopy = new System.Windows.Forms.Label();
+            this.finishBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewCopies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,11 +77,22 @@ namespace LibraryForm
             this.SelectCopy.TabIndex = 3;
             this.SelectCopy.Text = "Select a copy";
             // 
+            // finishBtn
+            // 
+            this.finishBtn.Location = new System.Drawing.Point(480, 664);
+            this.finishBtn.Name = "finishBtn";
+            this.finishBtn.Size = new System.Drawing.Size(75, 23);
+            this.finishBtn.TabIndex = 4;
+            this.finishBtn.Text = "Finish";
+            this.finishBtn.UseVisualStyleBackColor = true;
+            this.finishBtn.Click += new System.EventHandler(this.finishBtn_Click);
+            // 
             // BookSelection
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1016, 718);
+            this.Controls.Add(this.finishBtn);
             this.Controls.Add(this.SelectCopy);
             this.Controls.Add(this.DataGridViewCopies);
             this.Controls.Add(this.SelectBook);
@@ -100,6 +112,7 @@ namespace LibraryForm
         private System.Windows.Forms.Label SelectBook;
         private System.Windows.Forms.DataGridView DataGridViewCopies;
         private System.Windows.Forms.Label SelectCopy;
+        private System.Windows.Forms.Button finishBtn;
     }
 }
 

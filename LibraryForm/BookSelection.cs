@@ -41,9 +41,9 @@ namespace LibraryForm
 
             DataGridViewCopies.Columns.Add(loanBtnCol);
             DataGridViewCopies.Columns.Add(borrowerCol);
-            
 
-            
+
+            finishBtn.Visible = false;
             DataGridViewCopies.Visible = false;
             SelectCopy.Visible = false;
 
@@ -73,6 +73,7 @@ namespace LibraryForm
             DataGridViewCopies.BorderStyle = BorderStyle.None;
             DataGridViewCopies.Visible = true;
             SelectCopy.Visible = true;
+            finishBtn.Visible = true;
 
 
             if (BookComboBox.SelectedItem is Book selectedBook)
@@ -178,5 +179,9 @@ namespace LibraryForm
             }
         }
 
+        private void finishBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
