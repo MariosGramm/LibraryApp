@@ -35,9 +35,7 @@ namespace LibraryForm.Utils
                 {
                     CopyId = 3,
                     BookId = book.BookId,
-                    IsAvailable = false,
-                    LoanDate = DateTime.Today,
-                    ReturnDueDate = DateTime.Today.AddDays(7)
+                    IsAvailable = true,
                 });
             }
         }

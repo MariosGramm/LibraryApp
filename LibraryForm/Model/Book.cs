@@ -17,7 +17,7 @@ namespace LibraryForm.Model
             this.Author = Author;
         }
 
-        //Relation
+        //Relation with BookCopy 
         public List<BookCopy> Copies { get; set; } = new List<BookCopy>(); 
     }
 }

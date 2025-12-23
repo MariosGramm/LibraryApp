@@ -1,36 +1,55 @@
 ﻿using LibraryForm.Model;
+using LibraryForm.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace LibraryForm
 {
     public partial class BookSelection : Form
     {
+
+        private List<Book> books;
+
         public BookSelection()
         {
             InitializeComponent();
             BookComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             DataGridViewCopies.CellFormatting += DataGridViewCopies_CellFormatting;
+            DataGridViewCopies.CellContentClick += DataGridViewCopies_CellContentClick;
         }
 
         private void BookSelection_Load(object sender, EventArgs e)
         {
+
             DataGridViewButtonColumn loanBtnCol = new DataGridViewButtonColumn();
             loanBtnCol.Name = "Loan";
             loanBtnCol.Text = "Loan";
             loanBtnCol.HeaderText = "";
             loanBtnCol.UseColumnTextForButtonValue = true;
+            loanBtnCol.ReadOnly = true;
+
+            
+
+            DataGridViewTextBoxColumn borrowerCol = new DataGridViewTextBoxColumn();
+            borrowerCol.Name = "Borrower";
+            borrowerCol.HeaderText = "Borrower";
+            
+        
 
             DataGridViewCopies.Columns.Add(loanBtnCol);
+            DataGridViewCopies.Columns.Add(borrowerCol);
+            
 
-            DataGridViewCopies.ReadOnly = true;
+            
             DataGridViewCopies.Visible = false;
             SelectCopy.Visible = false;
 
 
 
-            var books = new List<Book>(Utils.ExcelToBookList.ΤoBookList("C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\Books.xlsx"));
+            books = new List<Book>(Utils.ExcelToBookList.ΤoBookList("C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\Books.xlsx"));
 
             Utils.PopulateBookCopies.Populate(books);
 
@@ -59,7 +78,15 @@ namespace LibraryForm
             if (BookComboBox.SelectedItem is Book selectedBook)
             {
                 DataGridViewCopies.DataSource = null;
-                DataGridViewCopies.DataSource = selectedBook.Copies; 
+                DataGridViewCopies.DataSource = selectedBook.Copies;
+
+                DataGridViewCopies.Columns["CopyId"].ReadOnly = true;
+                DataGridViewCopies.Columns["IsAvailable"].ReadOnly = true;
+                DataGridViewCopies.Columns["LoanDate"].ReadOnly = true;
+                DataGridViewCopies.Columns["ReturnDueDate"].ReadOnly = true;
+                DataGridViewCopies.Columns["BookId"].ReadOnly = true;
+
+
             }
         }
 
@@ -82,17 +109,72 @@ namespace LibraryForm
             }
         }
 
-        private void DataGridViewCopies_CellContentClick(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DataGridViewCopies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == DataGridViewCopies.Columns["Loan"].Index && e.RowIndex >= 0)
             {
                 BookCopy bookCopy = DataGridViewCopies.Rows[e.RowIndex].DataBoundItem as BookCopy;      //selected copy
 
-                //Loan
-                if (bookCopy != null && bookCopy.IsAvailable)
+                //No Loan - No Rental if true 
+                if (bookCopy == null || !bookCopy.IsAvailable)
                 {
-
+                    return;
                 }
+
+                Book selectedBook = books.Find(b => b.BookId == bookCopy.BookId);
+
+                //Loan 
+                bookCopy.IsAvailable = false;
+
+                bookCopy.LoanDate = DateTime.UtcNow;
+
+                bookCopy.ReturnDueDate = DateTime.UtcNow.AddDays(7);
+
+                DataGridViewCopies.Rows[e.RowIndex]
+                    .Cells["Borrower"].ReadOnly = true;         //no editing after populated 
+
+
+                //Rental
+                Rental rental = new Rental()
+                {
+                    BookId = bookCopy.BookId,
+                    CopyId = bookCopy.CopyId,
+                    Title = selectedBook.Title,
+                    LoanDate = (DateTime)bookCopy.LoanDate,
+                    ReturnDueDate = (DateTime)bookCopy.ReturnDueDate,   
+                    Borrower = DataGridViewCopies.Rows[e.RowIndex].Cells["Borrower"].Value?.ToString() ?? ""
+                };
+
+                
+
+                //JSON Writing 
+                string jsonPath = "C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\loans.json";
+                List<Rental> rentals;
+
+                if (File.Exists(jsonPath))
+                {
+                    string json = File.ReadAllText(jsonPath);
+                    rentals = JsonConvert.DeserializeObject<List<Rental>>(json)
+                              ?? new List<Rental>();
+                }
+                else
+                {
+                    rentals = new List<Rental>();
+                }
+
+                //Adding the new rental
+                rentals.Add(rental);
+
+                //New JSON file (updated)
+                string updatedJson = JsonConvert.SerializeObject(rentals, Formatting.Indented);
+
+                File.WriteAllText(jsonPath, updatedJson);
+
+                DataGridViewCopies.Refresh();
+
+                //Excel Writing
+
+                JsonToExcel.ToExcel(jsonPath);
             }
         }
 

@@ -11,7 +11,7 @@ namespace LibraryForm.Model
         public DateTime? ReturnDueDate { get; set; }
         
 
-        //Relation
+        //Relation with book 
         public int BookId { get; set; }     
     }
 }
