@@ -12,26 +12,35 @@ namespace LibraryForm.Utils
 {
     class JsonToExcel
     {
+       
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
         public static async Task ToExcelAsync(string jsonPath)
         {
-            await Task.Run(() =>
+            await _semaphore.WaitAsync();   
+
+            try
             {
-                var jsonFile = File.ReadAllText(jsonPath);
-
-                DataTable dt = (DataTable)JsonConvert.DeserializeObject(jsonFile, (typeof(DataTable)));
-
-                using (XLWorkbook wb = new XLWorkbook())
+                await Task.Run(() =>
                 {
+                    var jsonFile = File.ReadAllText(jsonPath);
 
-                    wb.AddWorksheet(dt, "Loans");
+                    DataTable dt = (DataTable)JsonConvert.DeserializeObject(
+                        jsonFile, typeof(DataTable));
 
-                    wb.SaveAs("C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\loans.xlsx");
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        wb.AddWorksheet(dt, "Loans");
 
-                }
-
-            });
-             
+                        wb.SaveAs(
+                            "C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\loans.xlsx");
+                    }
+                });
+            }
+            finally
+            {
+                _semaphore.Release(); 
+            }
         }
     }
 }
