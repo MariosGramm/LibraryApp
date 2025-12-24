@@ -51,9 +51,9 @@ namespace LibraryForm
 
 
 
-            books = new List<Book>(Utils.ExcelToBookList.ΤoBookList("C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\Books.xlsx"));
+            books = new List<Book>(ExcelToBookList.ΤoBookList("C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\Books.xlsx"));
 
-            Utils.PopulateBookCopies.Populate(books);
+            PopulateBookCopies.Populate(books);
 
             BookComboBox.DataSource = books;
             BookComboBox.DisplayMember = "Title";
@@ -107,12 +107,12 @@ namespace LibraryForm
 
                     cell.ReadOnly = true;
                     cell.FlatStyle = FlatStyle.Flat;
-                    cell.Style.ForeColor = System.Drawing.Color.Gray;
+                    cell.Style.ForeColor = Color.Gray;
                 }
             }
         }
 
-        private void DataGridViewCopies_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void DataGridViewCopies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == DataGridViewCopies.Columns["Loan"].Index && e.RowIndex >= 0)
             {
@@ -149,35 +149,16 @@ namespace LibraryForm
                 };
 
                 
-
-                //JSON Writing 
                 string jsonPath = "C:\\Users\\mgrammatopoulos\\Desktop\\LibraryProject\\loans.json";
-                List<Rental> rentals;
 
-                if (File.Exists(jsonPath))
-                {
-                    string json = File.ReadAllText(jsonPath);
-                    rentals = JsonConvert.DeserializeObject<List<Rental>>(json)
-                              ?? new List<Rental>();
-                }
-                else
-                {
-                    rentals = new List<Rental>();
-                }
 
-                //Adding the new rental
-                rentals.Add(rental);
-
-                //New JSON file (updated)
-                string updatedJson = JsonConvert.SerializeObject(rentals, Formatting.Indented);
-
-                File.WriteAllText(jsonPath, updatedJson);
+                //JSON writing
+                await JsonWriting.WriteAsync(jsonPath, rental);
 
                 DataGridViewCopies.Refresh();
 
                 //Excel Writing
-
-                JsonToExcel.ToExcel(jsonPath);
+                await JsonToExcel.ToExcelAsync(jsonPath);
             }
         }
 

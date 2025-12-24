@@ -128,6 +128,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ExcelToBookList.cs" />
+    <Compile Include="Utils\JsonWriting.cs" />
     <Compile Include="Utils\JsonToExcel.cs" />
     <Compile Include="Utils\PopulateBookCopies.cs" />
     <EmbeddedResource Include="BookSelection.resx">
