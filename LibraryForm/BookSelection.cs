@@ -55,6 +55,8 @@ namespace LibraryForm
 
             PopulateBookCopies.Populate(books);
 
+            ApplyLoansFromJson.Apply(books);
+
             BookComboBox.DataSource = books;
             BookComboBox.DisplayMember = "Title";
             BookComboBox.ValueMember = "BookId";
